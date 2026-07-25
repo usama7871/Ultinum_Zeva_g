@@ -10,19 +10,16 @@ const isPublicRoute = createRouteMatcher([
   "/__clerk(.*)",
 ]);
 
-// Next.js 16 requires an exported function named 'proxy'
-export function proxy(req: any) {
-  // If Clerk publishable key is not set, bypass proxy middleware for build safety
+export default clerkMiddleware(async (auth, req) => {
+  // Build-safety check if Clerk key is missing during build
   if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
     return NextResponse.next();
   }
 
-  return clerkMiddleware(async (auth, request) => {
-    if (!isPublicRoute(request)) {
-      await auth.protect();
-    }
-  })(req);
-}
+  if (!isPublicRoute(req)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
   matcher: [
