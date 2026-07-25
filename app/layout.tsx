@@ -16,26 +16,30 @@ export default function RootLayout({
 }) {
   const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-  return (
+  const content = (
     <html lang="en" className="dark">
       <body className="antialiased min-h-screen flex flex-col bg-stone-950 text-amber-50 selection:bg-amber-500 selection:text-stone-900">
-        {publishableKey ? (
-          <ClerkProvider
-            publishableKey={publishableKey}
-            appearance={{
-              theme: dark,
-              variables: {
-                colorPrimary: "#f59e0b",
-                colorBackground: "#1c1917",
-              },
-            }}
-          >
-            {children}
-          </ClerkProvider>
-        ) : (
-          children
-        )}
+        {children}
       </body>
     </html>
   );
+
+  if (publishableKey) {
+    return (
+      <ClerkProvider
+        publishableKey={publishableKey}
+        appearance={{
+          baseTheme: dark,
+          variables: {
+            colorPrimary: "#f59e0b",
+            colorBackground: "#1c1917",
+          },
+        }}
+      >
+        {content}
+      </ClerkProvider>
+    );
+  }
+
+  return content;
 }
