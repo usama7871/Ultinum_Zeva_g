@@ -29,7 +29,7 @@ export default function RootLayout({
       <ClerkProvider
         publishableKey={publishableKey}
         appearance={{
-          baseTheme: dark,
+          theme: dark,
           variables: {
             colorPrimary: "#f59e0b",
             colorBackground: "#1c1917",
