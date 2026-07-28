@@ -104,7 +104,7 @@ export default function TastingBoxDrawer({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/90 backdrop-blur-md z-50"
           />
 
           {/* Drawer Container */}
@@ -112,23 +112,23 @@ export default function TastingBoxDrawer({
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-lg bg-stone-950 border-l border-white/10 z-50 flex flex-col shadow-2xl overflow-hidden"
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed right-0 top-0 bottom-0 w-full max-w-lg glass-panel border-l border-white/5 z-50 flex flex-col shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden tactile-texture"
           >
             {/* Drawer Header */}
-            <div className="p-6 border-b border-white/10 flex items-center justify-between bg-stone-900/50">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
-                  <ShoppingBag className="w-5 h-5" />
+            <div className="p-6 border-b border-white/5 flex items-center justify-between bg-stone-900/40">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl skeuo-button flex items-center justify-center text-amber-500">
+                  <ShoppingBag className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="font-serif font-bold text-xl text-amber-50">Build Your Tasting Box</h2>
-                  <p className="text-xs text-amber-400/80">Fresh 18-hour copper kettle broths</p>
+                  <h2 className="font-serif font-black text-2xl text-amber-50 tracking-tight">Curation Studio</h2>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500/60">Artisanal Box Assembly</p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-full hover:bg-stone-800 text-stone-400 hover:text-stone-200 transition-colors"
+                className="skeuo-button p-2.5 rounded-full text-stone-500 hover:text-amber-400"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -136,36 +136,36 @@ export default function TastingBoxDrawer({
 
             {completedOrder ? (
               /* Order Confirmation Screen */
-              <div className="p-8 flex-1 flex flex-col items-center justify-center text-center space-y-6 overflow-y-auto">
+              <div className="p-8 flex-1 flex flex-col items-center justify-center text-center space-y-8 overflow-y-auto">
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="w-20 h-20 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  className="w-24 h-24 rounded-full skeuo-button-gold flex items-center justify-center text-stone-950 shadow-[0_0_50px_rgba(245,158,11,0.4)]"
                 >
-                  <CheckCircle className="w-10 h-10" />
+                  <CheckCircle className="w-12 h-12" />
                 </motion.div>
 
-                <div className="space-y-2">
-                  <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold">Order Confirmed</span>
-                  <h3 className="font-serif text-3xl font-bold text-amber-50">Kettle Simmer Initiated!</h3>
-                  <p className="text-sm text-stone-300 max-w-sm mx-auto">
-                    Thank you, <strong className="text-amber-400">{completedOrder.customerName}</strong>! Your order <span className="font-mono text-amber-300">{completedOrder.id}</span> has been dispatched to our culinary team.
+                <div className="space-y-3">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 animate-pulse-glow">Ritual Confirmed</span>
+                  <h3 className="font-serif text-4xl font-black text-amber-50 tracking-tighter">Kettle Simmer Initiated</h3>
+                  <p className="text-xs text-stone-400 max-w-xs mx-auto leading-relaxed">
+                    Greetings, <strong className="text-amber-400">{completedOrder.customerName}</strong>. Your artisanal curation <span className="font-mono text-amber-500">#{completedOrder.id.slice(-6)}</span> has entered the 18-hour copper kettle cycle.
                   </p>
                 </div>
 
-                <div className="w-full glass-panel p-6 rounded-2xl text-left space-y-3 text-xs text-stone-300">
-                  <div className="flex justify-between border-b border-white/10 pb-2">
-                    <span className="text-stone-400">Selection:</span>
-                    <span className="font-semibold text-amber-200">{completedOrder.boxSize}</span>
+                <div className="w-full neo-concave p-6 rounded-2xl text-left space-y-4">
+                  <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Tier Selected</span>
+                    <span className="text-xs font-bold text-amber-200">{completedOrder.boxSize}</span>
                   </div>
-                  <div className="flex justify-between border-b border-white/10 pb-2">
-                    <span className="text-stone-400">Total Investment:</span>
-                    <span className="font-bold text-amber-400 text-sm">${completedOrder.totalPrice}</span>
+                  <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Culinary Investment</span>
+                    <span className="text-sm font-black text-amber-400 font-mono">${completedOrder.totalPrice}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-stone-400">Status:</span>
-                    <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                      <Sparkles className="w-3.5 h-3.5" /> {completedOrder.status}
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Kitchen Status</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 flex items-center gap-2 px-2 py-1 rounded-full neo-convex-sm">
+                      <Sparkles className="w-3 h-3" /> {completedOrder.status}
                     </span>
                   </div>
                 </div>
@@ -175,60 +175,62 @@ export default function TastingBoxDrawer({
                     setCompletedOrder(null);
                     onClose();
                   }}
-                  className="w-full py-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-stone-950 font-bold hover:scale-105 transition-all shadow-xl"
+                  className="w-full skeuo-button-gold py-5 text-sm font-black uppercase tracking-[0.25em]"
                 >
                   Return to Tasting Room
                 </button>
               </div>
             ) : (
               /* Main Box Curation Form */
-              <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              <div className="flex-1 overflow-y-auto p-6 space-y-8">
                 {/* Box Size Toggle */}
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider text-amber-400 font-semibold">1. Choose Box Tier</label>
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500/80">1. Select Culinary Tier</label>
+                  <div className="grid grid-cols-2 gap-4">
                     <button
                       type="button"
                       onClick={() => setBoxSize("4-pack")}
-                      className={`p-4 rounded-2xl border text-left transition-all ${
+                      className={`p-5 rounded-2xl border text-left transition-all duration-500 ${
                         boxSize === "4-pack"
-                          ? "glass-panel-gold border-amber-500 text-amber-50"
-                          : "glass-panel border-white/10 text-stone-400 hover:border-amber-500/40"
+                          ? "skeuo-button-gold"
+                          : "neo-convex border-white/5 text-stone-500"
                       }`}
                     >
-                      <span className="block text-sm font-bold text-amber-50">4-Pack Signature</span>
-                      <span className="block text-xs text-amber-400 font-medium">$68 • 4 Insulated Jars</span>
+                      <span className={`block text-sm font-black uppercase tracking-tighter ${boxSize === "4-pack" ? "text-stone-950" : "text-amber-50/90"}`}>4-Pack Signature</span>
+                      <span className={`block text-[10px] font-bold mt-1 ${boxSize === "4-pack" ? "text-stone-900/60" : "text-amber-500/50"}`}>$68 • 4 Insulated Jars</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setBoxSize("8-pack")}
-                      className={`p-4 rounded-2xl border text-left transition-all relative ${
+                      className={`p-5 rounded-2xl border text-left transition-all duration-500 relative ${
                         boxSize === "8-pack"
-                          ? "glass-panel-gold border-amber-500 text-amber-50"
-                          : "glass-panel border-white/10 text-stone-400 hover:border-amber-500/40"
+                          ? "skeuo-button-gold"
+                          : "neo-convex border-white/5 text-stone-500"
                       }`}
                     >
-                      <span className="absolute -top-2.5 right-3 bg-amber-500 text-stone-950 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
-                        Save 15%
-                      </span>
-                      <span className="block text-sm font-bold text-amber-50">8-Pack Reserve</span>
-                      <span className="block text-xs text-amber-400 font-medium">$118 • 8 Insulated Jars</span>
+                      {boxSize !== "8-pack" && (
+                        <span className="absolute -top-2 right-2 neo-convex-sm bg-amber-500 text-stone-950 text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                          Best Value
+                        </span>
+                      )}
+                      <span className={`block text-sm font-black uppercase tracking-tighter ${boxSize === "8-pack" ? "text-stone-950" : "text-amber-50/90"}`}>8-Pack Reserve</span>
+                      <span className={`block text-[10px] font-bold mt-1 ${boxSize === "8-pack" ? "text-stone-900/60" : "text-amber-500/50"}`}>$118 • 8 Insulated Jars</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-xs font-semibold">
-                    <span className="text-stone-300">Box Capacity</span>
-                    <span className={totalJarsSelected === maxJars ? "text-emerald-400" : "text-amber-400"}>
-                      {totalJarsSelected} / {maxJars} Jars Selected
+                <div className="space-y-3">
+                  <div className="flex justify-between items-end">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-500">Box Capacity</span>
+                    <span className={`text-xs font-black font-mono ${totalJarsSelected === maxJars ? "text-emerald-400" : "text-amber-500"}`}>
+                      {totalJarsSelected} / {maxJars} JARS
                     </span>
                   </div>
-                  <div className="w-full h-2 bg-stone-800 rounded-full overflow-hidden">
+                  <div className="w-full h-3 neo-concave rounded-full p-0.5">
                     <div
-                      className={`h-full transition-all duration-300 ${
+                      className={`h-full rounded-full transition-all duration-700 ease-out shadow-[0_0_15px_rgba(245,158,11,0.3)] ${
                         totalJarsSelected === maxJars ? "bg-emerald-400" : "bg-amber-500"
                       }`}
                       style={{ width: `${Math.min((totalJarsSelected / maxJars) * 100, 100)}%` }}
@@ -237,43 +239,45 @@ export default function TastingBoxDrawer({
                 </div>
 
                 {/* Jar Selector List */}
-                <div className="space-y-3">
-                  <label className="text-xs uppercase tracking-wider text-amber-400 font-semibold">2. Select Your Signature Broths</label>
-                  <div className="space-y-2">
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500/80">2. Curation Menu</label>
+                  <div className="space-y-3">
                     {BROTH_CATALOG.map((flavor) => {
                       const qty = cartQuantities[flavor.id] || 0;
                       return (
                         <div
                           key={flavor.id}
-                          className="glass-panel p-3.5 rounded-xl border border-white/10 flex items-center justify-between"
+                          className="neo-convex p-4 rounded-2xl border border-white/5 flex items-center justify-between group transition-all hover:scale-[1.01]"
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="text-2xl">{flavor.emoji}</span>
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-xl neo-concave flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                              {flavor.emoji}
+                            </div>
                             <div>
-                              <p className="text-xs font-bold text-stone-100">{flavor.name}</p>
-                              <p className="text-[11px] text-stone-400">
-                                {flavor.caloriesNum} kcal • {flavor.proteinNum}g protein
+                              <p className="text-xs font-black uppercase tracking-tight text-amber-50">{flavor.name}</p>
+                              <p className="text-[10px] font-bold text-stone-500 mt-0.5">
+                                {flavor.caloriesNum} KCAL • {flavor.proteinNum}G PRO
                               </p>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-3 neo-concave p-1 rounded-xl">
                             <button
                               type="button"
                               onClick={() => onUpdateQuantity(flavor.id, -1)}
                               disabled={qty === 0}
-                              className="w-7 h-7 rounded-lg bg-stone-800 border border-white/10 hover:bg-stone-700 disabled:opacity-30 text-stone-200 flex items-center justify-center transition-colors"
+                              className="w-8 h-8 rounded-lg skeuo-button text-stone-400 hover:text-amber-500 disabled:opacity-20 flex items-center justify-center"
                             >
-                              <Minus className="w-3.5 h-3.5" />
+                              <Minus className="w-4 h-4" />
                             </button>
-                            <span className="w-6 text-center font-bold text-xs text-amber-300">{qty}</span>
+                            <span className="w-6 text-center font-black text-sm text-amber-400 font-mono">{qty}</span>
                             <button
                               type="button"
                               onClick={() => onUpdateQuantity(flavor.id, 1)}
                               disabled={totalJarsSelected >= maxJars}
-                              className="w-7 h-7 rounded-lg bg-amber-500 text-stone-950 hover:bg-amber-400 disabled:opacity-30 flex items-center justify-center font-bold transition-colors"
+                              className="w-8 h-8 rounded-lg skeuo-button-gold text-stone-950 disabled:opacity-20 flex items-center justify-center"
                             >
-                              <Plus className="w-3.5 h-3.5" />
+                              <Plus className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
@@ -284,62 +288,74 @@ export default function TastingBoxDrawer({
 
                 {/* Live Macro Summary Pill */}
                 {totalJarsSelected > 0 && (
-                  <div className="glass-panel-gold p-4 rounded-xl text-xs space-y-1">
-                    <p className="text-amber-300 font-bold uppercase text-[10px] tracking-widest">Tasting Box Nutrients</p>
-                    <div className="flex justify-between text-stone-200">
-                      <span>Total Energy: <strong className="text-amber-100">{totalCalories} kcal</strong></span>
-                      <span>Total Protein: <strong className="text-amber-100">{totalProtein}g</strong></span>
+                  <div className="neo-convex p-5 rounded-2xl border-amber-500/10">
+                    <p className="text-amber-500 font-black uppercase text-[9px] tracking-[0.25em] mb-3">Nutritional Profile</p>
+                    <div className="flex justify-between items-center text-stone-400">
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-xs font-bold text-amber-50">{totalCalories}</span>
+                        <span className="text-[9px] font-black uppercase">Calories</span>
+                      </div>
+                      <div className="w-px h-4 bg-white/10" />
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-xs font-bold text-amber-50">{totalProtein}g</span>
+                        <span className="text-[9px] font-black uppercase">Protein</span>
+                      </div>
+                      <div className="w-px h-4 bg-white/10" />
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-xs font-bold text-amber-50">{totalJarsSelected * 16}oz</span>
+                        <span className="text-[9px] font-black uppercase">Volume</span>
+                      </div>
                     </div>
                   </div>
                 )}
 
                 {/* Shipping & Customer Details */}
-                <form onSubmit={handleCheckout} className="space-y-4 border-t border-white/10 pt-4">
-                  <label className="text-xs uppercase tracking-wider text-amber-400 font-semibold">3. Delivery Details</label>
+                <form onSubmit={handleCheckout} className="space-y-6 border-t border-white/5 pt-8">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500/80">3. Logistics & Ritual</label>
 
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <input
                       type="text"
-                      placeholder="Your Full Name"
+                      placeholder="CONNOISSEUR NAME"
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-stone-900 border border-white/15 text-xs text-stone-100 focus:outline-none focus:border-amber-500"
+                      className="w-full neo-concave px-5 py-4 rounded-xl text-[11px] font-bold tracking-widest text-amber-50 placeholder:text-stone-600 focus:outline-none focus:ring-1 focus:ring-amber-500/30 uppercase"
                     />
                     <input
                       type="email"
-                      placeholder="Email Address (for tracking)"
+                      placeholder="SECURE EMAIL"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-stone-900 border border-white/15 text-xs text-stone-100 focus:outline-none focus:border-amber-500"
+                      className="w-full neo-concave px-5 py-4 rounded-xl text-[11px] font-bold tracking-widest text-amber-50 placeholder:text-stone-600 focus:outline-none focus:ring-1 focus:ring-amber-500/30 uppercase"
                     />
                     <input
                       type="text"
-                      placeholder="Shipping Address (City, State, Zip)"
+                      placeholder="GEOGRAPHICAL DESTINATION"
                       value={shippingAddress}
                       onChange={(e) => setShippingAddress(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-stone-900 border border-white/15 text-xs text-stone-100 focus:outline-none focus:border-amber-500"
+                      className="w-full neo-concave px-5 py-4 rounded-xl text-[11px] font-bold tracking-widest text-amber-50 placeholder:text-stone-600 focus:outline-none focus:ring-1 focus:ring-amber-500/30 uppercase"
                     />
                   </div>
 
-                  <div className="flex items-center gap-2 text-[11px] text-stone-400">
-                    <Truck className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span>Ships chilled in insulated recyclable glass packaging</span>
+                  <div className="flex items-center gap-3 p-4 rounded-2xl bg-amber-500/5 border border-amber-500/10">
+                    <Truck className="w-5 h-5 text-amber-500 shrink-0" />
+                    <span className="text-[10px] font-bold text-stone-400 leading-normal uppercase tracking-tight">Insulated temperature-controlled dispatch within 24 hours.</span>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting || totalJarsSelected < 1}
-                    className="w-full py-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 disabled:opacity-50 text-stone-950 font-bold text-sm shadow-xl shadow-amber-500/25 flex items-center justify-center gap-2 transition-all"
+                    className={`w-full py-5 rounded-full skeuo-button-gold font-black text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all ${isSubmitting ? 'animate-pulse' : 'hover:scale-[1.02] active:scale-95 shadow-[0_20px_40px_rgba(245,158,11,0.2)]'}`}
                   >
                     {isSubmitting ? (
-                      <span>Cooking & Sealing...</span>
+                      <span>Sealing Jars...</span>
                     ) : (
                       <>
                         <ShieldCheck className="w-5 h-5" />
-                        <span>Confirm Tasting Box (${basePrice})</span>
+                        <span>Confirm Curation (${basePrice})</span>
                       </>
                     )}
                   </button>
