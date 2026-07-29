@@ -1,135 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Leaf, Flame, Sparkles, Plus, Check } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { useUserActivity } from "@/context/UserActivityContext";
+import { PRODUCTS, getProduct } from "@/lib/catalog-engine";
+import { PortionSize, SpiceLevel } from "@/types/soup";
 
-export interface FlavorDetail {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  color: string;
-  notes: string[];
-  calories: string;
-  protein: string;
-  imageEmoji: string;
-  richness: number; // 1 - 100
-  umami: number;
-  aromatics: number;
-  spice: number;
-  pairing: string;
-}
-
-export const FLAVORS_DATA: FlavorDetail[] = [
-  {
-    id: "tomato",
-    name: "Roasted Tomato & Basil Velvet",
-    tagline: "San Marzano tomatoes roasted with sweet garlic & fresh basil",
-    description: "Rich, tangy, and velvety. Finished with cold-pressed Italian olive oil and cracked black pepper.",
-    color: "from-red-950/90 via-red-900/40 to-stone-950",
-    notes: ["San Marzano Tomato", "Sweet Garlic", "Genovese Basil", "Extra Virgin Olive Oil"],
-    calories: "180 kcal",
-    protein: "6g Protein",
-    imageEmoji: "🍅",
-    richness: 75,
-    umami: 80,
-    aromatics: 95,
-    spice: 20,
-    pairing: "Warm Sourdough Focaccia & Aged Goat Cheese",
-  },
-  {
-    id: "squash",
-    name: "Golden Squash & Turmeric Broth",
-    tagline: "Nourishing butternut squash infused with root turmeric & ginger",
-    description: "Smooth, comforting, and mildly spiced. Designed to restore vitality and warm the body.",
-    color: "from-amber-950/90 via-amber-900/40 to-stone-950",
-    notes: ["Roasted Squash", "Fresh Turmeric", "Wild Honey", "Toasted Pepitas"],
-    calories: "210 kcal",
-    protein: "5g Protein",
-    imageEmoji: "🎃",
-    richness: 70,
-    umami: 65,
-    aromatics: 88,
-    spice: 45,
-    pairing: "Roasted Pumpkin Seeds & Honey Glazed Pecans",
-  },
-  {
-    id: "mushroom",
-    name: "Wild Truffle & Mushroom Velvet",
-    tagline: "Earthy Chanterelle & Portobello mushrooms steeped with black truffle",
-    description: "Deep umami explosion. A luxurious broth blended with aged parmesan rind and fresh thyme.",
-    color: "from-stone-900/95 via-stone-850/40 to-stone-950",
-    notes: ["Wild Chanterelles", "Black Truffle Oil", "Fresh Thyme", "Aged Parmesan"],
-    calories: "240 kcal",
-    protein: "8g Protein",
-    imageEmoji: "🍄",
-    richness: 92,
-    umami: 98,
-    aromatics: 90,
-    spice: 15,
-    pairing: "Crispy Truffle Crostini & Roasted Rosemary Sprouts",
-  },
-  {
-    id: "bonebroth",
-    name: "Sacred Bone Broth Elixir",
-    tagline: "Slow-roasted marrow bones simmered 18 hours with star anise & rosemary",
-    description: "Bio-available collagen power broth. Deep amber clarity packed with essential minerals.",
-    color: "from-yellow-950/90 via-amber-950/40 to-stone-950",
-    notes: ["Grass-Fed Beef Marrow", "Organic Rosemary", "Star Anise", "Sea Salt Flakes"],
-    calories: "190 kcal",
-    protein: "18g Protein",
-    imageEmoji: "🍲",
-    richness: 88,
-    umami: 94,
-    aromatics: 85,
-    spice: 10,
-    pairing: "Shaved Daikon Radish & Toasted Sesame Drops",
-  },
-  {
-    id: "detox",
-    name: "Spicy Lemongrass Ginger Detox",
-    tagline: "Thai coconut base with galangal, kaffir lime & fresh bird's eye chili",
-    description: "Vibrant, zesty, and invigorating. Cleanses the palate with restorative ginger heat.",
-    color: "from-emerald-950/90 via-emerald-900/40 to-stone-950",
-    notes: ["Thai Coconut Milk", "Wild Galangal", "Kaffir Lime", "Lemongrass"],
-    calories: "130 kcal",
-    protein: "4g Protein",
-    imageEmoji: "🌿",
-    richness: 55,
-    umami: 70,
-    aromatics: 99,
-    spice: 85,
-    pairing: "Steamed Jasmine Dumplings & Lime Zest",
-  },
-  {
-    id: "cauliflower",
-    name: "Silken Golden Cauliflower",
-    tagline: "Toasted garlic & florets folded with white truffle essence & pine nuts",
-    description: "Creamy without dairy. Silky, nutty profile with a delicate truffle kiss.",
-    color: "from-stone-800/90 via-amber-950/30 to-stone-950",
-    notes: ["Golden Cauliflower", "White Truffle", "Toasted Pine Nuts", "Chives"],
-    calories: "160 kcal",
-    protein: "7g Protein",
-    imageEmoji: "🥣",
-    richness: 82,
-    umami: 85,
-    aromatics: 82,
-    spice: 10,
-    pairing: "Charred Garlic Baguette & Olive Tapenade",
-  },
-];
-
-interface FlavorEngineProps {
-  onAddToCart?: (flavorId: string) => void;
-}
-
-export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
-  const [active, setActive] = useState<FlavorDetail>(FLAVORS_DATA[0]);
+export default function FlavorEngine() {
+  const { addItem } = useCart();
+  const { logProductVisit } = useUserActivity();
+  
+  const [activeId, setActiveId] = useState(PRODUCTS[0].id);
+  const active = getProduct(activeId)!;
+  
+  const [selectedSize, setSelectedSize] = useState<PortionSize>("BOWL_16OZ");
+  const [selectedSpice, setSelectedSpice] = useState<SpiceLevel>("Medium");
   const [added, setAdded] = useState(false);
 
+  useEffect(() => {
+    logProductVisit(activeId);
+  }, [activeId, logProductVisit]);
+
   const handleAdd = () => {
-    if (onAddToCart) onAddToCart(active.id);
+    addItem({
+      productId: active.id,
+      quantity: 1,
+      size: selectedSize,
+      spiceLevel: active.allowSpiceCustomization ? selectedSpice : undefined,
+      addOns: [],
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
@@ -142,7 +43,7 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
         </div>
         <h2 className="font-serif text-4xl md:text-6xl font-bold text-amber-50">Sensory Tasting Room</h2>
         <p className="text-stone-400 max-w-xl mx-auto text-sm font-light">
-          Explore our six signature broths, each slow-simmered for 18 hours to extract optimal nutrient density and flavor depth.
+          Explore our signature collection, each slow-simmered for 18 hours to extract optimal nutrient density and flavor depth.
         </p>
       </div>
 
@@ -255,6 +156,10 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
               </h3>
               <p className="text-amber-400 font-medium italic mt-2 text-sm">{active.tagline}</p>
             </div>
+
+            <p className="text-stone-300 leading-relaxed font-light text-sm md:text-base">
+              {active.description}
+            </p>
 
             {/* Customization Options */}
             <div className="grid grid-cols-2 gap-4">

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, MessageSquarePlus, CheckCircle2, Award, Quote } from "lucide-react";
+import { PRODUCTS } from "@/lib/catalog-engine";
 
 interface ReviewItem {
   id: string;
@@ -18,7 +19,7 @@ export default function TastingReviews() {
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [author, setAuthor] = useState("");
-  const [flavor, setFlavor] = useState("Wild Truffle & Mushroom Velvet");
+  const [flavor, setFlavor] = useState(PRODUCTS[0].name);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -116,19 +117,17 @@ export default function TastingReviews() {
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   required
-                  className="px-4 py-3 rounded-xl bg-stone-950 border border-white/15 text-xs text-stone-100 focus:outline-none focus:border-amber-500"
+                  className="px-4 py-3 rounded-xl bg-stone-950 border border-white/15 text-xs text-stone-100 focus:outline-none focus:border-amber-500 uppercase font-bold tracking-widest"
                 />
                 <select
                   value={flavor}
                   onChange={(e) => setFlavor(e.target.value)}
-                  className="px-4 py-3 rounded-xl bg-stone-950 border border-white/15 text-xs text-stone-100 focus:outline-none focus:border-amber-500"
+                  className="px-4 py-3 rounded-xl bg-stone-950 border border-white/15 text-xs text-amber-100 focus:outline-none focus:border-amber-500 font-bold"
                 >
-                  <option value="Roasted Tomato & Basil Velvet">Roasted Tomato & Basil Velvet</option>
-                  <option value="Golden Squash & Turmeric Broth">Golden Squash & Turmeric Broth</option>
-                  <option value="Wild Truffle & Mushroom Velvet">Wild Truffle & Mushroom Velvet</option>
-                  <option value="Sacred Bone Broth Elixir">Sacred Bone Broth Elixir</option>
-                  <option value="Spicy Lemongrass Ginger Detox">Spicy Lemongrass Ginger Detox</option>
-                  <option value="Silken Golden Cauliflower">Silken Golden Cauliflower</option>
+                  {PRODUCTS.map(p => (
+                    <option key={p.id} value={p.name}>{p.name}</option>
+                  ))}
+                  <option value="General Brand Experience">General Brand Experience</option>
                 </select>
               </div>
 
@@ -160,7 +159,7 @@ export default function TastingReviews() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-full bg-amber-500 text-stone-950 font-bold text-xs hover:bg-amber-400 transition-colors"
+                className="w-full py-3.5 rounded-full bg-amber-500 text-stone-950 font-bold text-xs hover:bg-amber-400 transition-colors uppercase tracking-[0.2em]"
               >
                 {isSubmitting ? "Submitting..." : "Post Review to Community"}
               </button>

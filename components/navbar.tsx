@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useClerk, useUser } from '@clerk/nextjs';
 import { ChevronDown, Clock, Flame, LogOut, Menu, Package, ShoppingBag, Sparkles, User, X } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { getProduct } from '@/lib/catalog-engine';
 
 interface NavbarProps {
-  cartCount?: number;
-  cartQuantities?: Record<string, number>;
   onOpenCart?: () => void;
 }
 
@@ -19,22 +19,12 @@ interface OrderSummary {
   createdAt: string;
 }
 
-const CART_LABELS: Record<string, string> = {
-  tomato: "Roasted Tomato & Basil",
-  squash: "Golden Squash & Turmeric",
-  mushroom: "Wild Truffle & Mushroom",
-  bonebroth: "Sacred Bone Broth",
-  detox: "Lemongrass Ginger Detox",
-  cauliflower: "Golden Cauliflower",
-};
-
 function AuthControls({
-  cartCount,
-  cartQuantities,
   onOpenCart,
-}: Pick<NavbarProps, "cartCount" | "cartQuantities" | "onOpenCart">) {
+}: Pick<NavbarProps, "onOpenCart">) {
   const { isSignedIn, isLoaded, user } = useUser();
   const { signOut } = useClerk();
+  const { items, totalItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [orders, setOrders] = useState<OrderSummary[]>([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
@@ -77,14 +67,6 @@ function AuthControls({
   if (!isLoaded) return null;
 
   if (isSignedIn && user) {
-    const cartItems = Object.entries(cartQuantities ?? {})
-      .filter(([, quantity]) => quantity > 0)
-      .map(([id, quantity]) => ({
-        id,
-        quantity,
-        name: CART_LABELS[id] ?? id,
-      }));
-
     return (
       <div className="relative" ref={menuRef}>
         <button
@@ -126,16 +108,19 @@ function AuthControls({
                   <h3 className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-amber-500/80">
                     <ShoppingBag className="h-3.5 w-3.5" /> Current Selection
                   </h3>
-                  <span className="text-[10px] font-bold text-stone-500">{cartCount ?? 0} jars</span>
+                  <span className="text-[10px] font-bold text-stone-500">{totalItems} jars</span>
                 </div>
-                {cartItems.length > 0 ? (
+                {items.length > 0 ? (
                   <div className="space-y-1.5">
-                    {cartItems.slice(0, 3).map((item) => (
-                      <div key={item.id} className="flex justify-between gap-3 text-xs text-stone-300">
-                        <span className="truncate">{item.name}</span>
-                        <span className="shrink-0 font-bold text-amber-400">× {item.quantity}</span>
-                      </div>
-                    ))}
+                    {items.slice(0, 3).map((item) => {
+                      const product = getProduct(item.productId);
+                      return (
+                        <div key={item.cartItemId} className="flex justify-between gap-3 text-xs text-stone-300">
+                          <span className="truncate">{product?.name ?? item.productId}</span>
+                          <span className="shrink-0 font-bold text-amber-400">× {item.quantity}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
                   <p className="text-[11px] text-stone-500 italic">No jars selected yet...</p>
@@ -221,8 +206,9 @@ function AuthControls({
   );
 }
 
-export function Navbar({ cartCount = 0, cartQuantities, onOpenCart }: NavbarProps) {
+export function Navbar({ onOpenCart }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <header className="sticky top-0 z-50 w-full glass border-b border-white/5 tactile-texture">
@@ -264,16 +250,16 @@ export function Navbar({ cartCount = 0, cartQuantities, onOpenCart }: NavbarProp
             aria-label="Open Tasting Box Cart"
           >
             <ShoppingBag className="w-5 h-5" />
-            {cartCount > 0 && (
+            {totalItems > 0 && (
               <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full skeuo-button-gold border-2 border-stone-950 text-stone-950 font-black text-[10px] flex items-center justify-center shadow-lg animate-pulse-glow">
-                {cartCount}
+                {totalItems}
               </span>
             )}
           </button>
 
           {/* Auth Controls */}
           {process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ? (
-            <AuthControls cartCount={cartCount} cartQuantities={cartQuantities} onOpenCart={onOpenCart} />
+            <AuthControls onOpenCart={onOpenCart} />
           ) : (
             <button
               onClick={onOpenCart}
@@ -314,7 +300,7 @@ export function Navbar({ cartCount = 0, cartQuantities, onOpenCart }: NavbarProp
           <div className="pt-6 border-t border-white/10 space-y-4">
              {process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && (
                <div className="flex justify-center">
-                <AuthControls cartCount={cartCount} cartQuantities={cartQuantities} onOpenCart={onOpenCart} />
+                <AuthControls onOpenCart={onOpenCart} />
                </div>
             )}
             <button
@@ -324,7 +310,7 @@ export function Navbar({ cartCount = 0, cartQuantities, onOpenCart }: NavbarProp
               }}
               className="w-full skeuo-button-gold py-4 text-sm font-black uppercase tracking-[0.2em]"
             >
-              Build Tasting Box ({cartCount})
+              Build Tasting Box ({totalItems})
             </button>
           </div>
         </div>
