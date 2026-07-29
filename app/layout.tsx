@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { CartProvider } from "@/context/CartContext";
+import { UserActivityProvider } from "@/context/UserActivityContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +21,11 @@ export default function RootLayout({
   const content = (
     <html lang="en" className="dark">
       <body className="antialiased min-h-screen flex flex-col bg-stone-950 text-amber-50 selection:bg-amber-500 selection:text-stone-900">
-        {children}
+        <CartProvider>
+          <UserActivityProvider>
+            {children}
+          </UserActivityProvider>
+        </CartProvider>
       </body>
     </html>
   );

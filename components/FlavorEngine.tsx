@@ -148,10 +148,10 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
 
       {/* Flavor Selector Tabs */}
       <div className="flex justify-center gap-3 mb-12 flex-wrap">
-        {FLAVORS_DATA.map((f) => (
+        {PRODUCTS.map((f) => (
           <button
             key={f.id}
-            onClick={() => setActive(f)}
+            onClick={() => setActiveId(f.id)}
             className={`px-5 py-3 rounded-full text-xs font-bold transition-all flex items-center gap-2 border ${
               active.id === f.id
                 ? "bg-amber-500 text-stone-950 border-amber-400 shadow-lg shadow-amber-500/25 scale-105"
@@ -172,7 +172,7 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className={`glass-panel p-8 md:p-12 rounded-3xl border border-white/15 bg-gradient-to-br ${active.color} relative overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}
+          className={`glass-panel p-8 md:p-12 rounded-3xl border border-white/15 bg-gradient-to-br from-stone-950 via-stone-900 to-stone-950 relative overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}
         >
           {/* Left Side: Visual Emoji & Radar Bars */}
           <div className="relative flex flex-col items-center justify-center space-y-6">
@@ -195,40 +195,40 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
                     <span>Richness & Body</span>
-                    <span className="font-mono text-amber-300">{active.richness}%</span>
+                    <span className="font-mono text-amber-300">{active.attributes.richness}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
-                    <div className="h-full bg-amber-500" style={{ width: `${active.richness}%` }} />
+                    <div className="h-full bg-amber-500" style={{ width: `${active.attributes.richness}%` }} />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
                     <span>Umami Depth</span>
-                    <span className="font-mono text-amber-300">{active.umami}%</span>
+                    <span className="font-mono text-amber-300">{active.attributes.umami}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
-                    <div className="h-full bg-amber-400" style={{ width: `${active.umami}%` }} />
+                    <div className="h-full bg-amber-400" style={{ width: `${active.attributes.umami}%` }} />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
                     <span>Herbal Aromatics</span>
-                    <span className="font-mono text-amber-300">{active.aromatics}%</span>
+                    <span className="font-mono text-amber-300">{active.attributes.aromatics}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-400" style={{ width: `${active.aromatics}%` }} />
+                    <div className="h-full bg-emerald-400" style={{ width: `${active.attributes.aromatics}%` }} />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
                     <span>Ginger/Chili Heat</span>
-                    <span className="font-mono text-amber-300">{active.spice}%</span>
+                    <span className="font-mono text-amber-300">{active.attributes.spiceBase}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
-                    <div className="h-full bg-red-500" style={{ width: `${active.spice}%` }} />
+                    <div className="h-full bg-red-500" style={{ width: `${active.attributes.spiceBase}%` }} />
                   </div>
                 </div>
               </div>
@@ -239,10 +239,10 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
           <div className="space-y-6">
             <div className="flex flex-wrap gap-2">
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-amber-200 border border-white/20">
-                {active.calories}
+                {active.macros.calories} kcal
               </span>
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-amber-200 border border-white/20">
-                {active.protein}
+                {active.macros.protein}g Protein
               </span>
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
                 <Flame className="w-3 h-3" /> 18h Copper Kettle
@@ -256,9 +256,48 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
               <p className="text-amber-400 font-medium italic mt-2 text-sm">{active.tagline}</p>
             </div>
 
-            <p className="text-stone-300 leading-relaxed font-light text-sm md:text-base">
-              {active.description}
-            </p>
+            {/* Customization Options */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Portion Size</label>
+                <div className="flex flex-col gap-1.5">
+                  {active.availableSizes.map(size => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`text-[10px] px-3 py-2 rounded-lg border text-left transition-all ${
+                        selectedSize === size 
+                          ? "bg-amber-500/10 border-amber-500/50 text-amber-200" 
+                          : "border-white/5 text-stone-500 hover:border-white/10"
+                      }`}
+                    >
+                      {size.replace('BOWL_', '').replace('FAMILY_', '')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {active.allowSpiceCustomization && (
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Spice Level</label>
+                  <div className="flex flex-col gap-1.5">
+                    {(["Mild", "Medium", "Hot", "Chef Extra Spicy"] as SpiceLevel[]).map(level => (
+                      <button
+                        key={level}
+                        onClick={() => setSelectedSpice(level)}
+                        className={`text-[10px] px-3 py-2 rounded-lg border text-left transition-all ${
+                          selectedSpice === level 
+                            ? "bg-red-500/10 border-red-500/50 text-red-200" 
+                            : "border-white/5 text-stone-500 hover:border-white/10"
+                        }`}
+                      >
+                        {level}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Signature Ingredients */}
             <div>
@@ -266,22 +305,15 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
                 Organic Farm Ingredients
               </p>
               <div className="flex flex-wrap gap-2">
-                {active.notes.map((note, idx) => (
+                {active.dietaryTags.map((tag, idx) => (
                   <span
                     key={idx}
-                    className="text-xs px-3 py-1.5 rounded-lg glass-panel text-stone-200 border border-white/10 flex items-center gap-1.5"
+                    className="text-[10px] px-2 py-1 rounded bg-white/5 text-stone-300 border border-white/5"
                   >
-                    <Leaf className="w-3.5 h-3.5 text-amber-400" />
-                    {note}
+                    {tag}
                   </span>
                 ))}
               </div>
-            </div>
-
-            {/* Sommelier Pairing */}
-            <div className="p-4 rounded-xl glass-panel border border-amber-500/20 space-y-1">
-              <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold">Recommended Culinary Pairing</p>
-              <p className="text-xs text-stone-200 font-medium">{active.pairing}</p>
             </div>
 
             {/* Quick Add CTA */}
@@ -292,12 +324,12 @@ export default function FlavorEngine({ onAddToCart }: FlavorEngineProps) {
               {added ? (
                 <>
                   <Check className="w-5 h-5" />
-                  <span>Added to Tasting Box!</span>
+                  <span>Added to Ritual</span>
                 </>
               ) : (
                 <>
                   <Plus className="w-5 h-5" />
-                  <span>Add {active.name.split("&")[0]} to Box</span>
+                  <span>Curate Selection — ${active.basePrice.toFixed(2)}</span>
                 </>
               )}
             </button>
