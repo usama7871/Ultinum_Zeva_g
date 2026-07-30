@@ -32,9 +32,8 @@ export default function Home() {
     <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans">
       <AuthenticatedCartSync />
       
-      {/* Legacy Navbar expects cartCount and onOpenCart */}
+      {/* Navbar handles cart state internally via useCart */}
       <Navbar
-        cartCount={totalItems}
         onOpenCart={() => setIsCartOpen(true)}
       />
 
