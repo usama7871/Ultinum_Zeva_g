@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ziva: {
+        ZEVA_Jee: {
           crimson: "#991B1B",
           amber: "#D97706",
           charcoal: "#1C1917",

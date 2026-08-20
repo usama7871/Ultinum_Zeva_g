@@ -220,7 +220,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
           </div>
           <div className="hidden sm:block">
             <span className="font-serif font-black text-2xl tracking-tighter bg-gradient-to-b from-amber-100 via-amber-400 to-amber-600 bg-clip-text text-transparent block leading-none">
-              ZIVA G
+              ZEVA_Jee G
             </span>
             <span className="text-[9px] tracking-[0.3em] text-amber-500/60 font-black uppercase block mt-0.5">
               Artisanal Broths

@@ -6,7 +6,7 @@ import { Leaf, Flame, Sparkles, Plus, Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useUserActivity } from "@/context/UserActivityContext";
 import { PRODUCTS, getProduct } from "@/lib/catalog-engine";
-import { PortionSize, SpiceLevel } from "@/types/soup";
+import { PortionSize } from "@/types/soup";
 
 export default function FlavorEngine() {
   const { addItem } = useCart();
@@ -16,8 +16,13 @@ export default function FlavorEngine() {
   const active = getProduct(activeId)!;
   
   const [selectedSize, setSelectedSize] = useState<PortionSize>("BOWL_16OZ");
-  const [selectedSpice, setSelectedSpice] = useState<SpiceLevel>("Medium");
   const [added, setAdded] = useState(false);
+
+  const sizeLabels: Record<PortionSize, string> = {
+    BOWL_8OZ: "Single Bar",
+    BOWL_16OZ: "Double Bar",
+    FAMILY_32OZ: "Gift Set",
+  };
 
   useEffect(() => {
     logProductVisit(activeId);
@@ -28,7 +33,7 @@ export default function FlavorEngine() {
       productId: active.id,
       quantity: 1,
       size: selectedSize,
-      spiceLevel: active.allowSpiceCustomization ? selectedSpice : undefined,
+      spiceLevel: undefined,
       addOns: [],
     });
     setAdded(true);
@@ -39,11 +44,11 @@ export default function FlavorEngine() {
     <section id="flavors" className="relative py-24 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-16 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-gold text-amber-400 text-xs font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3.5 h-3.5" /> Handcrafted Collection
+          <Sparkles className="w-3.5 h-3.5" /> Botanical Soap Collection
         </div>
-        <h2 className="font-serif text-4xl md:text-6xl font-bold text-amber-50">Sensory Tasting Room</h2>
+        <h2 className="font-serif text-4xl md:text-6xl font-bold text-amber-50">ZEVA JEE™ Soap Rituals</h2>
         <p className="text-stone-400 max-w-xl mx-auto text-sm font-light">
-          Explore our signature collection, each slow-simmered for 18 hours to extract optimal nutrient density and flavor depth.
+          Discover handcrafted botanical soaps with natural ingredients and skin-loving formulas for every day.
         </p>
       </div>
 
@@ -60,7 +65,7 @@ export default function FlavorEngine() {
             }`}
           >
             <span className="text-base">{f.imageEmoji}</span>
-            <span>{f.name.split("&")[0]}</span>
+            <span>{f.name}</span>
           </button>
         ))}
       </div>
@@ -89,13 +94,13 @@ export default function FlavorEngine() {
             {/* Flavor Spectrum Metrics */}
             <div className="w-full max-w-sm glass-panel p-5 rounded-2xl border border-white/10 space-y-2.5">
               <p className="text-[11px] font-bold uppercase tracking-wider text-amber-400 mb-1">
-                Flavor Spectrum Telemetry
+                Botanical Profile
               </p>
 
               <div className="space-y-2 text-xs">
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
-                    <span>Richness & Body</span>
+                    <span>Botanical Strength</span>
                     <span className="font-mono text-amber-300">{active.attributes.richness}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
@@ -105,7 +110,7 @@ export default function FlavorEngine() {
 
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
-                    <span>Umami Depth</span>
+                    <span>Aroma Depth</span>
                     <span className="font-mono text-amber-300">{active.attributes.umami}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
@@ -115,7 +120,7 @@ export default function FlavorEngine() {
 
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
-                    <span>Herbal Aromatics</span>
+                    <span>Texture & Lather</span>
                     <span className="font-mono text-amber-300">{active.attributes.aromatics}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
@@ -125,7 +130,7 @@ export default function FlavorEngine() {
 
                 <div>
                   <div className="flex justify-between text-stone-300 mb-1">
-                    <span>Ginger/Chili Heat</span>
+                    <span>Purity Score</span>
                     <span className="font-mono text-amber-300">{active.attributes.spiceBase}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-stone-950 rounded-full overflow-hidden">
@@ -140,13 +145,13 @@ export default function FlavorEngine() {
           <div className="space-y-6">
             <div className="flex flex-wrap gap-2">
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-amber-200 border border-white/20">
-                {active.macros.calories} kcal
+                Handcrafted Blend
               </span>
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-amber-200 border border-white/20">
-                {active.macros.protein}g Protein
+                Natural Botanicals
               </span>
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
-                <Flame className="w-3 h-3" /> 18h Copper Kettle
+                <Flame className="w-3 h-3" /> Small-Batch Craft
               </span>
             </div>
 
@@ -164,7 +169,7 @@ export default function FlavorEngine() {
             {/* Customization Options */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Portion Size</label>
+                <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Bar Size</label>
                 <div className="flex flex-col gap-1.5">
                   {active.availableSizes.map(size => (
                     <button
@@ -176,32 +181,12 @@ export default function FlavorEngine() {
                           : "border-white/5 text-stone-500 hover:border-white/10"
                       }`}
                     >
-                      {size.replace('BOWL_', '').replace('FAMILY_', '')}
+                      {sizeLabels[size]}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {active.allowSpiceCustomization && (
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-stone-500">Spice Level</label>
-                  <div className="flex flex-col gap-1.5">
-                    {(["Mild", "Medium", "Hot", "Chef Extra Spicy"] as SpiceLevel[]).map(level => (
-                      <button
-                        key={level}
-                        onClick={() => setSelectedSpice(level)}
-                        className={`text-[10px] px-3 py-2 rounded-lg border text-left transition-all ${
-                          selectedSpice === level 
-                            ? "bg-red-500/10 border-red-500/50 text-red-200" 
-                            : "border-white/5 text-stone-500 hover:border-white/10"
-                        }`}
-                      >
-                        {level}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Signature Ingredients */}

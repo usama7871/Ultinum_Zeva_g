@@ -1,6 +1,6 @@
-# 🥣 ZIVA G — Artisanal Broths & Culinary Rituals
+# 🥣 ZEVA_Jee G — Artisanal Broths & Culinary Rituals
 
-Welcome to the **Ziva G Soup** experience. We elevate comfort food into a luxury culinary ritual, delivering 18-hour copper-kettle simmered organic broths in eco-insulated glass jars.
+Welcome to the **ZEVA_Jee G Soup** experience. We elevate comfort food into a luxury culinary ritual, delivering 18-hour copper-kettle simmered organic broths in eco-insulated glass jars.
 
 ---
 
@@ -104,4 +104,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Made with ❤️ by the Ziva G Engineering Team.**
+**Made with ❤️ by the ZEVA_Jee G Engineering Team.**

@@ -77,7 +77,7 @@ export default function SimmeringKettle() {
 
             {/* Kettle Brand Engraving */}
             <span className="absolute bottom-4 font-serif font-bold text-xs tracking-widest text-amber-200/40 uppercase">
-              ZIVA G • COPPER N°18
+              ZEVA_Jee G • COPPER N°18
             </span>
           </motion.div>
 

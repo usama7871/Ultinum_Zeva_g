@@ -19,7 +19,7 @@ export const UserActivityProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedActivity = localStorage.getItem("ziva_activity");
+    const savedActivity = localStorage.getItem("ZEVA_Jee_activity");
     if (savedActivity) {
       try {
         setActivity(JSON.parse(savedActivity));
@@ -31,7 +31,7 @@ export const UserActivityProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   // Save to localStorage on change
   useEffect(() => {
-    localStorage.setItem("ziva_activity", JSON.stringify(activity));
+    localStorage.setItem("ZEVA_Jee_activity", JSON.stringify(activity));
   }, [activity]);
 
   const logProductVisit = (productId: string) => {

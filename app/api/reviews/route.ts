@@ -23,11 +23,11 @@ const initialReviews = [
   },
   {
     id: "rev_3",
-    author: "Julian Thorne",
+    author: "Nasir__Sadiq",
     role: "Culinary Arts Critic",
     rating: 5,
     flavor: "Golden Squash & Turmeric Broth",
-    comment: "Subtle ginger heat combined with silky butternut texture. Comfort food elevated into pure luxury art.",
+    comment: "A masterclass in slow-simmered flavor layering. The turmeric's warmth and the squash's sweetness create a comforting, nourishing experience.",
     createdAt: new Date(Date.now() - 86400000 * 8).toISOString(),
   },
 ];

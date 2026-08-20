@@ -12,23 +12,23 @@ interface FAQItem {
 
 const FAQ_DATA: FAQItem[] = [
   {
-    question: "How should I store and reheat my Ziva G broth jars?",
-    answer: "Keep jars refrigerated upon arrival. Once opened, consume within 7 days. To reheat, pour desired portion into a small stainless steel saucepan and warm gently over low-medium heat until steam rises. Avoid boiling rapidly to preserve delicate aromatics and collagen structure.",
+    question: "How should I store my ZEVA JEE™ soap bars?",
+    answer: "Store bars in a cool, dry place away from direct sunlight. Keep the soap dry between uses using a draining soap dish to extend the life of each bar.",
     icon: <Thermometer className="w-5 h-5 text-amber-400" />,
   },
   {
-    question: "How are the jars shipped to ensure fresh delivery?",
-    answer: "Every Ziva G tasting box is packed in recyclable thermal insulation with non-toxic gel ice packs. Jars arrive cold and sealed tightly in heavy-gauge European glass.",
-    icon: <PackageCheck className="w-5 h-5 text-amber-400" />,
-  },
-  {
-    question: "What makes the 18-hour copper kettle simmer unique?",
-    answer: "Copper conducts heat uniformly, preventing scorching while maintaining a consistent low extraction temperature. This gentle 18-hour process draws out deep bone collagen, mineral salts, and rich herbal terpenes without degrading nutrient vitality.",
+    question: "Are ZEVA JEE™ soaps safe for sensitive skin?",
+    answer: "Yes. Each soap is made with gentle botanical ingredients and natural oils. Avoid use on broken skin and discontinue if irritation occurs.",
     icon: <ShieldCheck className="w-5 h-5 text-amber-400" />,
   },
   {
-    question: "Can I swap flavors or pause my Broth Club subscription?",
-    answer: "Absoluty! Members can swap signature broths, change delivery frequencies (weekly, bi-weekly, or monthly), or pause orders at any time directly through the Member Portal.",
+    question: "How are the soaps packaged for delivery?",
+    answer: "Our soaps are wrapped in recyclable paper and shipped in eco-friendly insulation. Every order arrives ready to display or gift.",
+    icon: <PackageCheck className="w-5 h-5 text-amber-400" />,
+  },
+  {
+    question: "Can I try different scents before I commit to a full set?",
+    answer: "Absolutely. Choose a curated sampler or mix-and-match bar sizes to discover your favorite botanical blend.",
     icon: <RefreshCw className="w-5 h-5 text-amber-400" />,
   },
 ];

@@ -275,7 +275,7 @@ function DashboardContent() {
                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-[10px] font-black uppercase tracking-[0.15em]">
                                   <div className="space-y-1">
                                     <p className="text-stone-600">Geographical Origin</p>
-                                    <p className="text-stone-300">Culinary Lab #4, ZIVA G HQ</p>
+                                    <p className="text-stone-300">Culinary Lab #4, ZEVA_Jee G HQ</p>
                                   </div>
                                   <div className="space-y-1">
                                     <p className="text-stone-600">Vessel Type</p>

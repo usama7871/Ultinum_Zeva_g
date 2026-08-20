@@ -26,7 +26,7 @@ export default function Footer() {
             <div className="w-9 h-9 rounded-xl bg-amber-500 flex items-center justify-center">
               <Flame className="w-5 h-5 text-stone-950" />
             </div>
-            <span className="font-serif font-bold text-2xl text-amber-50">ZIVA G</span>
+            <span className="font-serif font-bold text-2xl text-amber-50">ZEVA_Jee G</span>
           </div>
           <p className="text-xs text-stone-300 font-light max-w-sm leading-relaxed">
             Crafting luxury, organic slow-simmered broths in small batches. Delivered in eco-friendly insulated glass packaging directly to your doorstep.
@@ -72,7 +72,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-stone-500">
-        <p>© {new Date().getFullYear()} ZIVA G Artisanal Broths. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} ZEVA_Jee G Artisanal Broths. All rights reserved.</p>
         <div className="flex gap-6">
           <a href="#" className="hover:text-stone-300 transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-stone-300 transition-colors">Terms of Service</a>

@@ -6,9 +6,9 @@ import { UserActivityProvider } from "@/context/UserActivityContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ZIVA G — Artisanal Broths & Culinary Soups",
-  description: "Elevating comfort food into a luxury culinary ritual. 18-hour copper-kettle simmered organic broths delivered in eco-insulated glass jars.",
-  keywords: ["Ziva G", "Artisanal Broth", "Bone Broth", "Organic Soup", "Copper Kettle", "Gourmet Culinary"],
+  title: "ZEVA JEE™ — Botanical Soap Collection",
+  description: "Discover ZEVA JEE™ handcrafted botanical soaps inspired by nature, made with premium ingredients for daily skincare.",
+  keywords: ["ZEVA JEE", "Botanical Soap", "Handmade Soap", "Organic Skincare", "Natural Ingredients", "Soap Collection"],
 };
 
 export default function RootLayout({

@@ -69,7 +69,7 @@ export default function TastingBoxDrawer({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customerName: customerName || "Guest Connoisseur",
-          email: email || "connoisseur@zivag.com",
+          email: email || "connoisseur@ZEVA_Jeeg.com",
           boxSize,
           shippingAddress: shippingAddress || "Temperature Controlled Express Shipping",
           items: itemsPayload,
