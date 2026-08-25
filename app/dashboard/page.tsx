@@ -123,7 +123,7 @@ function DashboardContent() {
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
               <span className="neo-convex-sm px-4 py-1.5 rounded-full text-[10px] font-black text-amber-500/80 bg-stone-900/50">LEVEL 4 ARTISAN</span>
               <span className="neo-convex-sm px-4 py-1.5 rounded-full text-[10px] font-black text-emerald-500/80 bg-stone-900/50">VERIFIED COLLECTOR</span>
-              <span className="neo-convex-sm px-4 py-1.5 rounded-full text-[10px] font-black text-stone-400 bg-stone-900/50">JOINED {new Date(user?.createdAt || Date.now()).getFullYear()}</span>
+              <span className="neo-convex-sm px-4 py-1.5 rounded-full text-[10px] font-black text-stone-400 bg-stone-900/50">JOINED {user?.createdAt ? new Date(user.createdAt).getFullYear() : "—"}</span>
             </div>
           </div>
         </div>

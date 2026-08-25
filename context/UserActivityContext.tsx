@@ -20,13 +20,17 @@ export const UserActivityProvider: React.FC<{ children: React.ReactNode }> = ({ 
   // Load from localStorage on mount
   useEffect(() => {
     const savedActivity = localStorage.getItem("ZEVA_Jee_activity");
-    if (savedActivity) {
+    if (!savedActivity) return;
+
+    const timer = window.setTimeout(() => {
       try {
         setActivity(JSON.parse(savedActivity));
       } catch (e) {
         console.error("Failed to parse user activity", e);
       }
-    }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   // Save to localStorage on change
