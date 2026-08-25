@@ -321,6 +321,12 @@ export default function TastingBoxDrawer({
                 <form onSubmit={handleCheckout} className="space-y-6 border-t border-white/5 pt-8">
                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500/80">3. Logistics & Ritual</label>
 
+                  {totalJarsSelected !== maxJars && (
+                    <p className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-xs font-bold text-amber-200" role="status">
+                      Select exactly {maxJars} jars to continue. Currently selected: {totalJarsSelected}.
+                    </p>
+                  )}
+
                   <div className="space-y-3">
                     <input
                       type="text"
