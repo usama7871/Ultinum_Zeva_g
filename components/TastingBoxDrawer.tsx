@@ -32,6 +32,7 @@ export default function TastingBoxDrawer({
   const [email, setEmail] = useState("");
   const [shippingAddress, setShippingAddress] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [completedOrder, setCompletedOrder] = useState<CompletedOrder | null>(null);
 
   const maxJars = boxSize === "4-pack" ? 4 : 8;
@@ -50,11 +51,12 @@ export default function TastingBoxDrawer({
 
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (totalJarsSelected < 1) {
-      alert("Please add at least 1 broth jar to your tasting box.");
+    if (totalJarsSelected !== maxJars) {
+      setCheckoutError(`Please select exactly ${maxJars} jars for your ${boxSize}.`);
       return;
     }
 
+    setCheckoutError(null);
     setIsSubmitting(true);
 
     const itemsPayload = BROTH_CATALOG.filter((f) => (cartQuantities[f.id] || 0) > 0).map((f) => ({
@@ -79,6 +81,11 @@ export default function TastingBoxDrawer({
       const data = await res.json();
       setIsSubmitting(false);
 
+      if (!res.ok || !data.success) {
+        setCheckoutError(data.error || "We could not complete your order. Please try again.");
+        return;
+      }
+
       if (data.success) {
         setCompletedOrder(data.order);
         confetti({
@@ -90,6 +97,7 @@ export default function TastingBoxDrawer({
       }
     } catch (err) {
       console.error(err);
+      setCheckoutError("Network error. Please check your connection and try again.");
       setIsSubmitting(false);
     }
   };
@@ -347,7 +355,7 @@ export default function TastingBoxDrawer({
 
                   <button
                     type="submit"
-                    disabled={isSubmitting || totalJarsSelected < 1}
+                    disabled={isSubmitting || totalJarsSelected !== maxJars}
                     className={`w-full py-5 rounded-full skeuo-button-gold font-black text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all ${isSubmitting ? 'animate-pulse' : 'hover:scale-[1.02] active:scale-95 shadow-[0_20px_40px_rgba(245,158,11,0.2)]'}`}
                   >
                     {isSubmitting ? (
