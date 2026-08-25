@@ -88,7 +88,7 @@ function AuthControls({
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 top-14 z-[60] w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl glass-panel border-amber-500/20 shadow-2xl shadow-black/60 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="absolute left-1/2 right-auto top-14 z-[60] w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 overflow-hidden rounded-2xl glass-panel border-amber-500/20 shadow-2xl shadow-black/60 animate-in fade-in slide-in-from-top-2 duration-300">
             <div className="tactile-texture flex items-center gap-3 border-b border-white/10 bg-amber-500/10 p-4">
               <div className="relative">
                 <img src={user.imageUrl} alt="" className="h-12 w-12 rounded-full object-cover ring-2 ring-amber-500/40" />
@@ -242,7 +242,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
         </nav>
 
         {/* Action Buttons & Auth */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="flex items-center gap-3 md:gap-5">
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
@@ -257,17 +257,19 @@ export function Navbar({ onOpenCart }: NavbarProps) {
             )}
           </button>
 
-          {/* Auth Controls */}
-          {process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ? (
-            <AuthControls onOpenCart={onOpenCart} />
-          ) : (
-            <button
-              onClick={onOpenCart}
-              className="skeuo-button-gold px-6 py-2.5 text-xs font-black uppercase tracking-widest"
-            >
-              Build Box
-            </button>
-          )}
+          <div className="hidden md:block">
+            {/* Auth Controls */}
+            {process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ? (
+              <AuthControls onOpenCart={onOpenCart} />
+            ) : (
+              <button
+                onClick={onOpenCart}
+                className="skeuo-button-gold px-6 py-2.5 text-xs font-black uppercase tracking-widest"
+              >
+                Build Box
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Mobile Hamburger Toggle */}
