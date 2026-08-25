@@ -23,13 +23,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Load from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem("ZEVA_Jee_cart");
-    if (savedCart) {
+    if (!savedCart) return;
+
+    const timer = window.setTimeout(() => {
       try {
         setItems(JSON.parse(savedCart));
       } catch (e) {
         console.error("Failed to parse cart from storage", e);
       }
-    }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   // Save to localStorage on change
