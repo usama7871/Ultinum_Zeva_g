@@ -5,14 +5,14 @@ import { BOX_CAPACITY, BOX_PRICES, getCatalogItem } from "@/lib/catalog";
 
 const WHATSAPP_NUMBER = "923154996338";
 
-function buildWhatsAppUrl(order: { id: string; customerName: string; email: string; shippingAddress: string; boxSize: string; totalPrice: number }, items: Array<{ flavorName: string; quantity: number }>) {
+function buildWhatsAppUrl(order: { id: string; customerName: string; email: string; shippingAddress: string | null; boxSize: string; totalPrice: number }, items: Array<{ flavorName: string; quantity: number }>) {
   const message = [
     "ZEVA JEE G — NEW ORDER",
     "Order ID: #" + order.id.slice(-8),
     "",
     "Customer: " + order.customerName,
     "Email: " + order.email,
-    "Address: " + order.shippingAddress,
+    "Address: " + (order.shippingAddress || "Not provided"),
     "Pack: " + order.boxSize,
     "",
     "Items:",
