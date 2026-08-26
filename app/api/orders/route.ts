@@ -104,7 +104,9 @@ export async function POST(req: Request) {
       include: { items: true },
     });
 
-    return NextResponse.json({ success: true, order: newOrder });
+    const whatsappUrl = buildWhatsAppUrl(newOrder, validItems);
+
+    return NextResponse.json({ success: true, order: newOrder, whatsappUrl });
   } catch (error) {
     console.error("Failed to place order:", error);
     return NextResponse.json({ success: false, error: "Order failed" }, { status: 500 });
