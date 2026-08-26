@@ -3,6 +3,28 @@ import { db } from "@/lib/db";
 import { getAuthenticatedAccount } from "@/lib/auth";
 import { BOX_CAPACITY, BOX_PRICES, getCatalogItem } from "@/lib/catalog";
 
+const WHATSAPP_NUMBER = "923154996338";
+
+function buildWhatsAppUrl(order: { id: string; customerName: string; email: string; shippingAddress: string; boxSize: string; totalPrice: number }, items: Array<{ flavorName: string; quantity: number }>) {
+  const message = [
+    "ZEVA JEE G — NEW ORDER",
+    "Order ID: #" + order.id.slice(-8),
+    "",
+    "Customer: " + order.customerName,
+    "Email: " + order.email,
+    "Address: " + order.shippingAddress,
+    "Pack: " + order.boxSize,
+    "",
+    "Items:",
+    ...items.map((entry) => "• " + entry.flavorName + " × " + entry.quantity),
+    "",
+    "Total: $" + order.totalPrice.toFixed(2),
+    "Please confirm this order and share the expected dispatch time.",
+  ].join("\n");
+
+  return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+}
+
 interface OrderPayloadItem {
   flavorId: unknown;
   quantity: unknown;
