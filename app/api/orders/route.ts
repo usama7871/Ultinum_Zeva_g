@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { getAuthenticatedAccount } from "@/lib/auth";
 import { BOX_CAPACITY, BOX_PRICES, getCatalogItem } from "@/lib/catalog";
 
-const WHATSAPP_NUMBER = "923154996338";
+const WHATSAPP_NUMBER = "923154996438";
 
 function buildWhatsAppUrl(order: { id: string; customerName: string; email: string; shippingAddress: string | null; boxSize: string; totalPrice: number }, items: Array<{ flavorName: string; quantity: number }>) {
   const message = [
