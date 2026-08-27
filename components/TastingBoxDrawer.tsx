@@ -180,15 +180,18 @@ export default function TastingBoxDrawer({
                 </div>
 
                 {completedOrder.whatsappUrl && (
-                  <a
-                    href={completedOrder.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (completedOrder.whatsappUrl) {
+                        window.location.assign(completedOrder.whatsappUrl);
+                      }
+                    }}
                     className="w-full rounded-2xl bg-[#25D366] py-4 text-sm font-black uppercase tracking-[0.15em] text-[#063b1c] shadow-[0_12px_30px_rgba(37,211,102,0.2)] transition-transform hover:scale-[1.02]"
                   >
                     <MessageCircle className="mr-2 inline-block h-5 w-5" />
                     Send order on WhatsApp
-                  </a>
+                  </button>
                 )}
 
                 <button
