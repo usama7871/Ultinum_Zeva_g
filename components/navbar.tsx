@@ -192,20 +192,28 @@ function AuthControls({
 
   return (
     <div className="flex items-center gap-3">
-      <a
+      <Link
         href="/sign-in"
         target="_self"
+        onClick={(event) => {
+          event.preventDefault();
+          window.location.assign("/sign-in");
+        }}
         className="text-sm font-bold text-stone-400 hover:text-amber-400 transition-colors px-2"
       >
         Sign In
-      </a>
-      <a
+      </Link>
+      <Link
         href="/sign-up"
         target="_self"
+        onClick={(event) => {
+          event.preventDefault();
+          window.location.assign("/sign-up");
+        }}
         className="skeuo-button-gold px-5 py-2.5 text-xs font-black uppercase tracking-widest"
       >
         Join Club
-      </a>
+      </Link>
     </div>
   );
 }
