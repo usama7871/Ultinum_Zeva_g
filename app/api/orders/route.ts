@@ -3,6 +3,28 @@ import { db } from "@/lib/db";
 import { getAuthenticatedAccount } from "@/lib/auth";
 import { BOX_CAPACITY, BOX_PRICES, getCatalogItem } from "@/lib/catalog";
 
+const WHATSAPP_NUMBER = "923154996338";
+
+function buildWhatsAppUrl(order: { id: string; customerName: string; email: string; shippingAddress: string | null; boxSize: string; totalPrice: number }, items: Array<{ flavorName: string; quantity: number }>) {
+  const message = [
+    "ZEVA JEE G — NEW ORDER",
+    "Order ID: #" + order.id.slice(-8),
+    "",
+    "Customer: " + order.customerName,
+    "Email: " + order.email,
+    "Address: " + (order.shippingAddress || "Not provided"),
+    "Pack: " + order.boxSize,
+    "",
+    "Items:",
+    ...items.map((entry) => "• " + entry.flavorName + " × " + entry.quantity),
+    "",
+    "Total: $" + order.totalPrice.toFixed(2),
+    "Please confirm this order and share the expected dispatch time.",
+  ].join("\n");
+
+  return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+}
+
 interface OrderPayloadItem {
   flavorId: unknown;
   quantity: unknown;
@@ -104,7 +126,9 @@ export async function POST(req: Request) {
       include: { items: true },
     });
 
-    return NextResponse.json({ success: true, order: newOrder });
+    const whatsappUrl = buildWhatsAppUrl(newOrder, validItems);
+
+    return NextResponse.json({ success: true, order: newOrder, whatsappUrl });
   } catch (error) {
     console.error("Failed to place order:", error);
     return NextResponse.json({ success: false, error: "Order failed" }, { status: 500 });

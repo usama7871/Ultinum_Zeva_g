@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ShoppingBag, Plus, Minus, CheckCircle, Sparkles, Truck, ShieldCheck } from "lucide-react";
+import { X, ShoppingBag, Plus, Minus, CheckCircle, MessageCircle, Sparkles, Truck, ShieldCheck } from "lucide-react";
 import confetti from "canvas-confetti";
 import { BROTH_CATALOG } from "@/lib/catalog";
 
@@ -19,6 +19,7 @@ interface CompletedOrder {
   boxSize: string;
   totalPrice: number;
   status: string;
+  whatsappUrl?: string;
 }
 
 export default function TastingBoxDrawer({
@@ -87,7 +88,7 @@ export default function TastingBoxDrawer({
       }
 
       if (data.success) {
-        setCompletedOrder(data.order);
+        setCompletedOrder({ ...data.order, whatsappUrl: data.whatsappUrl });
         confetti({
           particleCount: 120,
           spread: 80,
@@ -177,6 +178,18 @@ export default function TastingBoxDrawer({
                     </span>
                   </div>
                 </div>
+
+                {completedOrder.whatsappUrl && (
+                  <a
+                    href={completedOrder.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full rounded-2xl bg-[#25D366] py-4 text-sm font-black uppercase tracking-[0.15em] text-[#063b1c] shadow-[0_12px_30px_rgba(37,211,102,0.2)] transition-transform hover:scale-[1.02]"
+                  >
+                    <MessageCircle className="mr-2 inline-block h-5 w-5" />
+                    Send order on WhatsApp
+                  </a>
+                )}
 
                 <button
                   onClick={() => {

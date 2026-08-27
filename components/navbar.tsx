@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useClerk, useUser } from '@clerk/nextjs';
-import { ChevronDown, Clock, Flame, LogOut, Menu, Package, ShoppingBag, Sparkles, User, X } from 'lucide-react';
+import { ChevronDown, Clock, Flame, LogOut, Menu, MessageCircle, Package, ShoppingBag, Sparkles, User, X } from 'lucide-react';
+
+const WHATSAPP_CONTACT_URL = "https://wa.me/923154996338?text=" + encodeURIComponent("Hi ZEVA JEE G, I would like help choosing my order.");
 import { useCart } from '@/context/CartContext';
 import { getProduct } from '@/lib/catalog-engine';
 
@@ -243,6 +245,17 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 
         {/* Action Buttons & Auth */}
         <div className="flex items-center gap-3 md:gap-5">
+          <a
+            href={WHATSAPP_CONTACT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with ZEVA JEE G on WhatsApp"
+            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-3 py-2.5 text-[#063b1c] shadow-[0_8px_20px_rgba(37,211,102,0.15)] transition-transform hover:scale-105 active:scale-95"
+          >
+            <MessageCircle className="h-5 w-5" />
+            <span className="hidden sm:inline text-[10px] font-black uppercase tracking-widest">WhatsApp</span>
+          </a>
+
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
@@ -300,6 +313,14 @@ export function Navbar({ onOpenCart }: NavbarProps) {
           </div>
           
           <div className="pt-6 border-t border-white/10 space-y-4">
+            <a
+              href={WHATSAPP_CONTACT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-sm font-black uppercase tracking-[0.15em] text-[#063b1c]"
+            >
+              <MessageCircle className="h-5 w-5" /> Chat with ZEVA JEE G
+            </a>
              {process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && (
                <div className="flex justify-center">
                 <AuthControls onOpenCart={onOpenCart} />
