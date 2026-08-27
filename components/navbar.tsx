@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useClerk, useUser } from '@clerk/nextjs';
 import { ChevronDown, Clock, Flame, LogOut, Menu, MessageCircle, Package, ShoppingBag, Sparkles, User, X } from 'lucide-react';
 
-const WHATSAPP_CONTACT_URL = "https://wa.me/923154996338?text=" + encodeURIComponent("Hi ZEVA JEE G, I would like help choosing my order.");
+const WHATSAPP_CONTACT_URL = "https://wa.me/923154996438?text=" + encodeURIComponent("Hi ZEVA JEE G, I would like help choosing my order.");
 import { useCart } from '@/context/CartContext';
 import { getProduct } from '@/lib/catalog-engine';
 
@@ -192,18 +192,20 @@ function AuthControls({
 
   return (
     <div className="flex items-center gap-3">
-      <Link
+      <a
         href="/sign-in"
+        target="_self"
         className="text-sm font-bold text-stone-400 hover:text-amber-400 transition-colors px-2"
       >
         Sign In
-      </Link>
-      <Link
+      </a>
+      <a
         href="/sign-up"
+        target="_self"
         className="skeuo-button-gold px-5 py-2.5 text-xs font-black uppercase tracking-widest"
       >
         Join Club
-      </Link>
+      </a>
     </div>
   );
 }
