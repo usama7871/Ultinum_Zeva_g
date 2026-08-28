@@ -41,12 +41,12 @@ export default function FlavorEngine() {
   };
 
   return (
-    <section id="flavors" className="zeva-section relative py-16 md:py-20 px-6 max-w-7xl mx-auto">
+    <section id="flavors" className="relative py-24 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-16 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-gold text-amber-400 text-xs font-semibold uppercase tracking-widest">
           <Sparkles className="w-3.5 h-3.5" /> Botanical Soap Collection
         </div>
-        <h2 className="font-serif text-3xl md:text-5xl font-bold text-amber-50">ZEVA JEE™ Soap Rituals</h2>
+        <h2 className="font-serif text-4xl md:text-6xl font-bold text-amber-50">ZEVA JEE™ Soap Rituals</h2>
         <p className="text-stone-400 max-w-xl mx-auto text-sm font-light">
           Discover handcrafted botanical soaps with natural ingredients and skin-loving formulas for every day.
         </p>
@@ -78,7 +78,7 @@ export default function FlavorEngine() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className={`glass-panel p-6 md:p-8 rounded-3xl border border-white/15 bg-gradient-to-br from-stone-950 via-stone-900 to-stone-950 relative overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center`}
+          className={`glass-panel p-8 md:p-12 rounded-3xl border border-white/15 bg-gradient-to-br from-stone-950 via-stone-900 to-stone-950 relative overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}
         >
           {/* Left Side: Visual Emoji & Radar Bars */}
           <div className="relative flex flex-col items-center justify-center space-y-6">
