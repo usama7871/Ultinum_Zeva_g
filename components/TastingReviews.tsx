@@ -73,13 +73,13 @@ export default function TastingReviews() {
   };
 
   return (
-    <section id="reviews" className="zeva-section neon-divider py-16 md:py-20 px-6 max-w-7xl mx-auto border-t border-white/10">
+    <section id="reviews" className="py-24 px-6 max-w-7xl mx-auto border-t border-white/10">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-gold text-amber-400 text-xs font-semibold uppercase tracking-widest">
             <Award className="w-3.5 h-3.5" /> Culinary Acclaim
           </div>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-amber-50">Tasting Room Notes</h2>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-amber-50">Tasting Room Notes</h2>
           <p className="text-stone-400 text-sm font-light max-w-lg">
             Endorsed by Michelin-star chefs, holistic nutrition experts, and passionate culinary enthusiasts.
           </p>
