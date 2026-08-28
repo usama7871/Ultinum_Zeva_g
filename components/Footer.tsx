@@ -18,7 +18,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="zeva-footer border-t border-white/10 bg-stone-950/80 backdrop-blur-xl py-12 md:py-16 px-6 mt-20 relative overflow-hidden">
+    <footer className="border-t border-white/10 bg-stone-950/80 backdrop-blur-xl py-16 px-6 mt-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 text-sm text-stone-400 pb-12 border-b border-white/10">
         {/* Brand Column */}
         <div className="md:col-span-5 space-y-4">
