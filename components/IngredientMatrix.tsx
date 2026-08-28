@@ -39,10 +39,10 @@ const pillars: QualityPillar[] = [
 
 export default function IngredientMatrix() {
   return (
-    <section id="sourcing" className="zeva-section neon-divider py-16 md:py-20 px-6 max-w-7xl mx-auto border-t border-white/10">
+    <section id="sourcing" className="py-24 px-6 max-w-7xl mx-auto border-t border-white/10">
       <div className="text-center mb-16 space-y-3">
         <h2 className="text-xs uppercase tracking-widest text-ZEVA_Jee-gold font-semibold">Uncompromising Quality</h2>
-        <p className="font-serif text-3xl md:text-4xl font-bold text-ZEVA_Jee-cream">The ZEVA_Jee G Standard</p>
+        <p className="font-serif text-4xl md:text-5xl font-bold text-ZEVA_Jee-cream">The ZEVA_Jee G Standard</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
