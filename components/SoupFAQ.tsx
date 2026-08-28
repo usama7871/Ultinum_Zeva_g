@@ -37,12 +37,12 @@ export default function SoupFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="zeva-section py-16 md:py-20 px-6 max-w-5xl mx-auto">
+    <section id="faq" className="py-24 px-6 max-w-5xl mx-auto">
       <div className="text-center mb-16 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-gold text-amber-400 text-xs font-semibold uppercase tracking-widest">
           <HelpCircle className="w-3.5 h-3.5" /> Care & Concierge
         </div>
-        <h2 className="font-serif text-3xl md:text-4xl font-bold text-amber-50">Frequently Asked Questions</h2>
+        <h2 className="font-serif text-4xl md:text-5xl font-bold text-amber-50">Frequently Asked Questions</h2>
         <p className="text-stone-400 text-sm font-light max-w-lg mx-auto">
           Everything you need to know about our slow kettle crafting, shipping, and storage.
         </p>
