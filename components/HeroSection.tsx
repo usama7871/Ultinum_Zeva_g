@@ -20,7 +20,7 @@ export default function HeroSection({ onOpenCart }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
+    <section className="hero-stage relative min-h-[84vh] flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
       {/* Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
 
@@ -46,7 +46,7 @@ export default function HeroSection({ onOpenCart }: HeroSectionProps) {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-amber-50 leading-none"
+          className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-amber-50 leading-none"
         >
           Pure Broths. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500">
