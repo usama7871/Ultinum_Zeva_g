@@ -15,10 +15,10 @@ export default function Home() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
-    <div className="zeva-shell min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans">
       <Navbar onOpenCart={() => setIsCartOpen(true)} />
 
-      <main className="flex-grow space-y-8 md:space-y-12">
+      <main className="flex-grow space-y-12">
         <HeroSection onOpenCart={() => setIsCartOpen(true)} />
         <FlavorEngine />
         <KettleCraft />
