@@ -16,12 +16,12 @@ export default function SimmeringKettle() {
   const stageInfo = getSimmerStage();
 
   return (
-    <section id="kettle" className="zeva-section py-16 md:py-20 px-6 max-w-7xl mx-auto">
+    <section id="kettle" className="py-24 px-6 max-w-7xl mx-auto">
       <div className="text-center mb-16 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel-gold text-amber-400 text-xs font-semibold uppercase tracking-widest">
           <Flame className="w-3.5 h-3.5" /> Culinary Engineering
         </div>
-        <h2 className="font-serif text-3xl md:text-5xl font-bold text-amber-50">18-Hour Copper Kettle Process</h2>
+        <h2 className="font-serif text-4xl md:text-6xl font-bold text-amber-50">18-Hour Copper Kettle Process</h2>
         <p className="text-stone-400 max-w-xl mx-auto text-sm font-light">
           Simmered in hand-hammered heavy copper kettles to ensure even thermal conductivity without scorching delicate botanicals.
         </p>
@@ -29,7 +29,7 @@ export default function SimmeringKettle() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Left Side: Interactive Kettle Visualizer */}
-        <div className="lg:col-span-7 glass-panel p-6 md:p-8 rounded-3xl border border-white/15 relative overflow-hidden flex flex-col items-center justify-center min-h-[380px]">
+        <div className="lg:col-span-7 glass-panel p-8 md:p-12 rounded-3xl border border-white/15 relative overflow-hidden flex flex-col items-center justify-center min-h-[420px]">
           {/* Background Ambient Glow */}
           <div
             className="absolute w-80 h-80 rounded-full blur-3xl transition-all duration-700 pointer-events-none"
