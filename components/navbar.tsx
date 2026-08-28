@@ -223,11 +223,11 @@ export function Navbar({ onOpenCart }: NavbarProps) {
   const { totalItems } = useCart();
 
   return (
-    <header className="sticky top-0 z-50 w-full glass border-b border-white/5 tactile-texture">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="neon-nav sticky top-0 z-50 w-full glass border-b border-white/5 tactile-texture">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 rounded-xl skeuo-button-gold flex items-center justify-center group-hover:rotate-6 transition-transform duration-500">
+          <div className="w-10 h-10 md:w-11 md:h-11 rounded-xl skeuo-button-gold flex items-center justify-center group-hover:rotate-6 transition-transform duration-500">
             <Flame className="w-6 h-6 text-stone-950" />
           </div>
           <div className="hidden sm:block">
@@ -307,7 +307,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-white/5 glass-panel px-6 py-8 space-y-6 animate-in slide-in-from-top-5 duration-500">
+        <div className="lg:hidden border-t border-white/5 glass-panel px-5 py-6 space-y-5 animate-in slide-in-from-top-5 duration-500">
           <div className="grid grid-cols-1 gap-2">
             {['flavors', 'kettle', 'sourcing', 'reviews', 'faq'].map((item) => (
               <a
