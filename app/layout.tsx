@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CartProvider } from "@/context/CartContext";
 import { UserActivityProvider } from "@/context/UserActivityContext";
 import "./globals.css";
@@ -26,6 +27,7 @@ export default function RootLayout({
             {children}
           </UserActivityProvider>
         </CartProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
